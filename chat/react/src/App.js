@@ -50,7 +50,7 @@ const App=()=>{
       });
       setList(prevState=>{
         let k=prevState.slice();
-            k.push(<div key={dat.name} onClick={activeusersetter.bind(this,dat.name)} className={dat.online?"username--active":"username"}>{dat.name}</div>);
+            k.push(<div key={dat.name} onClick={activeusersetter.bind(this,dat.name)} className={dat.online?"username--active className = ":"username"}>{dat.name}</div>);
         return k;
     });
     });
@@ -162,10 +162,17 @@ const App=()=>{
   if(!username.isSet){
     return (
       <div className="Username--main">
-        <form className="Username--form" onSubmit={userNameDone}>
-          <label for="em" >UserName(Email):</label>
-          <input className="text--area" type="email" id="em" onChange={userNameSetter} name="mes" required />
-          <button classes="button--height text--bold">Enter</button>
+        {/* <div  className="Username--heading">
+        <h1>Login to enter Chat Room</h1>
+        </div> */}
+        <form className="container" onSubmit={userNameDone}>
+          <div className="col-75">
+          <label htmlFor="em" >Username :</label>
+          </div>
+          <div className="col-25">
+          <input className="text--area" placeholder="Enter your Email address" type="email" id="em" onChange={userNameSetter} name="mes" required />
+          </div>
+          <button className="sub">Submit</button>
         </form>
       </div>
     );
@@ -186,22 +193,22 @@ const App=()=>{
   return (
     <div className="App">
       <div className="title">
-        Chat-System
+        Welcome To The Chat Room!!
       </div>
       <div className="Main--box">
         <div className="Main--box--users">
-          <div className="title">Users</div>
+          <div className="Active-agents">Active Doctors</div>
           {list}
         </div>
-        <div className="Main--box--chat">
+        <div className={Activeuser.isSet?"Main--box--chat":"Main--box--chat1"}>
           <div className="title">
-            Chat Messages {Activeuser.isSet?Activeuser.name:null}
+            Messages {Activeuser.isSet?Activeuser.name:null}
           </div>
           <div className="Main--box--chat--messagearea">
           {Activeuser.isSet?meslist:
           <div  className="Message--main ">
             <div className="Message--main--content">
-                      START TALKING</div>
+                      Select an Active Doctor to begin the conversation </div>
                   <div className="Message--main--time">12:00 am</div>
             </div>}
 
@@ -211,11 +218,11 @@ const App=()=>{
                    <div className="Message--main--time">12:00 pm</div>
             </div> */}
           </div>
-          {Activeuser.isSet?
+          {Activeuser.isSet? 
           <div className="c">
           <form className="cb--bind" onSubmit={mesSend}>
-                          <input className="text--area" type="text" id="mes" name="mes" required/>
-                          <button classes="button--height text--bold">Enter</button>
+                          <input className="type" type="text" id="mes" name="mes" placeholder="Type Message..." required/>
+                          <button className="enter">Send</button>
           </form>
           </div>
           :null}
